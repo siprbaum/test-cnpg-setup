@@ -1,0 +1,18 @@
+[tools]
+helm = "latest"
+kind = "latest"
+#kubectl = "latest"
+#podman = "latest"
+
+[env]
+KUBECONFIG="/etc/rancher/rke2/rke2.yaml"
+_.path = "/var/lib/rancher/rke2/bin"
+activate = '''
+# Load kubectl bash completion
+if command -v kubectl >/dev/null; then
+    source <(kubectl completion bash)
+fi
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+'''
+

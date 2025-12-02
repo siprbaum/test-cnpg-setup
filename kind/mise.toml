@@ -1,0 +1,23 @@
+[tools]
+helm = "latest"
+kind = "latest"
+podman = "latest"
+krew = "latest"
+kubectl = "latest"
+
+[env]
+activate = '''
+# Load kubectl bash completion
+if command -v kubectl >/dev/null; then
+    source <(kubectl completion bash)
+fi
+
+# I have 'alias k=kubectl' in .bashrc. Ensure that 
+# I have completion for that as well
+complete -F __start_kubectl k
+
+source <(kubectl cnpg completion bash)
+
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+'''
